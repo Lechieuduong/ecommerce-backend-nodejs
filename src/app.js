@@ -7,6 +7,7 @@ const { default: rateLimit } = require('express-rate-limit');
 const { default: helmet } = require('helmet');
 // morgan là 1 thư viện để in ra các log của chúng ta khi 1 người dùng chạy 1 cái restrict
 const morgan = require('morgan');
+const { checkOverload } = require('./helpers/check.connect');
 
 const app = express();
 const apiLimiter = rateLimit({
@@ -33,8 +34,10 @@ app.use('/api/', apiLimiter);
 // morgan('short');
 // Chỉ bao gồm phương thức , status và thời gian phản hồi
 // morgan('tiny');
-// init db
 
+// init db
+require('./dbs/init.mongodb');
+checkOverload();
 // init routes
 app.get('/', (req, res, next) => {
     const strCompress = 'Hello';
