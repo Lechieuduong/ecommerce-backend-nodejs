@@ -1,12 +1,12 @@
 'use strict'
 
-const mongoose = require('mongoose'); // Erase if already required
+const { Schema, model } = require('mongoose'); // Erase if already required
 
 const DOCUMENT_NAME = 'Shop';
 const COLLECTION_NAME = 'Shops';
 
 // Declare the Schema of the Mongo model
-var shopeSchema = new mongoose.Schema({
+var shopeSchema = new Schema({
     name:{
         type: String,
         trim: true,
@@ -27,7 +27,7 @@ var shopeSchema = new mongoose.Schema({
         default: 'inactive'
     },
     verify:{
-        type: mongoose.Schema.Types.Array,
+        type: Schema.Types.Array,
        default: false
     },
     roles: {
@@ -41,4 +41,4 @@ var shopeSchema = new mongoose.Schema({
 );
 
 //Export the model
-module.exports = mongoose.model(DOCUMENT_NAME, shopeSchema);
+module.exports = model(DOCUMENT_NAME, shopeSchema);

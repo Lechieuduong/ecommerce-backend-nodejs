@@ -4,6 +4,7 @@ const express = require('express');
 const { default: rateLimit } = require('express-rate-limit');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');
+
 const { checkOverload } = require('./helpers/check.connect');
 
 const app = express();
@@ -18,6 +19,10 @@ console.log('Process', process.env);
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}))
 app.use('/api/', apiLimiter);
 
 // init db
