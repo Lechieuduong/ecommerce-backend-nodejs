@@ -21,11 +21,10 @@ class AccessService {
 
             if (holderShop) {
                 return {
-                    code: xxx,
+                    code: 'xxx',
                     message: 'Shop already registered!'
                 }
             }
-            console.log(111, password);
             const passwordHash = await bcrypt.hash(password, 10);
             const newShop = await shopModel.create({
                 name, email, password, passwordHash, roles: [RoleShop.SHOP]
@@ -34,7 +33,7 @@ class AccessService {
             if (newShop) {
                 // create privateKey, publicKey
                 const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
-                    moduleLength: 4096
+                    modulusLength: 4096
                 });
 
                 console.log({ privateKey, publicKey });
@@ -46,7 +45,7 @@ class AccessService {
 
                 if (!publicKeyString) {
                     return {
-                        code: xxx,
+                        code: 'xxx',
                         message: 'Error'
                     }
                 }

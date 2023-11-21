@@ -14,12 +14,12 @@ var shopeSchema = new Schema({
     },
     email:{
         type: String,
-        required:true,
-        unique:true,
+        required: true,
+        trim: true,
     },
     password:{
         type: String,
-        required:true,
+        required: true,
     },
     status:{
         type: String,
@@ -27,8 +27,8 @@ var shopeSchema = new Schema({
         default: 'inactive'
     },
     verify:{
-        type: Schema.Types.Array,
-       default: false
+        type: Schema.Types.Boolean,
+        default: false
     },
     roles: {
         type: Array,
