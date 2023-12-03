@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:dev": "node server.js --watch"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "express-rate-limit": "^7.1.4",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.0.1"
   },
   "devDependencies": {
