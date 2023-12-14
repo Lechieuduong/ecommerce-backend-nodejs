@@ -6,7 +6,7 @@ const DOCUMENT_NAME = 'Shop';
 const COLLECTION_NAME = 'Shops';
 
 // Declare the Schema of the Mongo model
-var shopeSchema = new Schema({
+const shopSchema = new Schema({
     name:{
         type: String,
         trim: true,
@@ -16,6 +16,7 @@ var shopeSchema = new Schema({
         type: String,
         required: true,
         trim: true,
+        unique: true
     },
     password:{
         type: String,
@@ -35,10 +36,9 @@ var shopeSchema = new Schema({
         default: []
     }
 }, {
-        timestamps: true, 
-        collection: COLLECTION_NAME
-    }
-);
+    timestamps: true, 
+    collection: COLLECTION_NAME,
+});
 
 //Export the model
-module.exports = model(DOCUMENT_NAME, shopeSchema);
+module.exports = model(DOCUMENT_NAME, shopSchema);

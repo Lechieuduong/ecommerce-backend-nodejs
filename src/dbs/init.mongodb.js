@@ -9,9 +9,8 @@ class Database {
     constructor () {
         this.connect()
     }
-
     // connect 
-    connect(type = 'mongodb' ) {
+    connect(type = 'mongodb') {
         if (1 === 1) {
             mongoose.set('debug', true);
             mongoose.set('debug', { color: true })

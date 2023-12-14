@@ -1,13 +1,13 @@
 // apikey sử dụng để lưu trữ token từ ngày này quá tháng nọ
 `usse strict`
 
-const { model, Schema, Types} = require('mongoose');
+const { model, Schema } = require('mongoose');
 
 const DOCUMENT_NAME = 'Apikey';
 const COLLECTION_NAME = 'Apikeys';
 
 const apiKeySchema = new Schema({
-    // Đây là key sẽ general ra
+    // Đây là key sẽ gen ra
     key: {
         type: String,
         required: true,
