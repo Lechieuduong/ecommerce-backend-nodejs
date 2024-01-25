@@ -49,15 +49,7 @@ const checkPermission = (permission) => {
     }
 }
 
-const assignHandler = fn => {
-    return (req, res, next) => {
-        fn(req, res, next).catch(next);
-    }
-}
-
-
 module.exports = {
     apiKey, 
-    checkPermission,
-    assignHandler
+    checkPermission
 }
