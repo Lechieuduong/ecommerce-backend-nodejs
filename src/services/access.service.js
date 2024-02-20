@@ -1,4 +1,4 @@
-
+'use strict';
 const shopModel = require('../models/shop.model');
 const bcrypt = require('bcrypt');
 const crypto = require('node:crypto');
@@ -16,6 +16,41 @@ const RoleShop = {
 };
 
 class AccessService {
+
+    static handleRefreshTokenV2 = async ({ keyStore, user, refreshToken }) => {
+        console.log(keyStore);
+        const { userId, email } = user;
+        if (keyStore.refreshTokensUsed.includes(refreshToken)) {
+            await KeyTokenService.deleteKeyById(userId);
+            throw new ForbiddenError('Something went wrong! Please Re-login');
+        }
+
+        if (keyStore.refreshToken !== refreshToken) {
+            throw new AuthFailureError('Shop not registered')
+        }
+
+        console.log(email);
+        const foundShop = await findByEmail(email);
+        if(!foundShop) throw new AuthFailureError('Shop not registered')
+
+        // create 1 cap moi
+        const tokens = await createTokenPair({ userId, email }, keyStore.publicKey, keyStore.privateKey);
+
+        // update token
+        await keyStore.updateOne({
+            $set: {
+                refreshToken: tokens.refreshToken
+            }, 
+            $addToSet: {
+                refreshTokenUsed: refreshToken
+            }
+        })
+
+        return {
+            user,
+            tokens
+        }
+    }
 
     /**
      * Check token used
